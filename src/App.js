@@ -6,20 +6,14 @@ class App extends React.Component {
         super(props);
         this.state = {
             city: ''
-        }
+        };
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-    }
-
-    handleChange = (event) => {
-        this.setState({
-            [event.target.id]: event.target.value
-        });
+        console.log(this.state.city);
     }
 
     render() {
@@ -29,12 +23,13 @@ class App extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="city">Enter City</label>
-                            <input id='city'
-                                   value={this.state.city}
-                                   type="text"
+                            <input type="text"
                                    className="form-control"
-                                   onChange={this.handleChange}
-                                   required />
+                                   value={this.state.city}
+                                   onChange={event => this.setState({ city: event.target.value })}
+                                   placeholder='Atlanta,GA'
+                                   required
+                            />
                         </div>
                         <input type='submit'
                                className="btn btn-primary"

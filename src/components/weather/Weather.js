@@ -8,9 +8,9 @@ class Weather extends React.Component {
             isLoaded: false,
             data: null,
             url: 'http://api.openweathermap.org/data/2.5/weather?q=',
-            appId: '6a1755e17f596796af14957b79f7cf96',
-            city: this.props.city
+            appId: '6a1755e17f596796af14957b79f7cf96'
         }
+        console.log(this.props);
     }
 
     componentDidMount() {
@@ -37,7 +37,7 @@ class Weather extends React.Component {
     render() {
         const {error, isLoaded, data} = this.state;
         if (error) {
-            return <div>API Error: {error.message}</div>;
+            return <div className='col-6'>API Error: {error.message}</div>;
         } else if (!isLoaded) {
             return (
                 <div className='alert alert-info'>
