@@ -14,22 +14,24 @@ class Weather extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`${this.state.url}${this.state.city}&APPID=${this.state.appId}`)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        data: result
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
+        if(this.props.city) {
+            fetch(`${this.state.url}${this.props.city}&APPID=${this.state.appId}`)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        this.setState({
+                            isLoaded: true,
+                            data: result
+                        });
+                    },
+                    (error) => {
+                        this.setState({
+                            isLoaded: true,
+                            error
+                        });
+                    }
+                )
+        }
     }
 
     render() {
@@ -37,11 +39,28 @@ class Weather extends React.Component {
         if (error) {
             return <div>API Error: {error.message}</div>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
+            return (
+                <div className='alert alert-info'>
+                    <p>Search a location to display current weather conditions.</p>
+                    <p>Examples:</p>
+                    <ul className="list">
+                        <li>Omaha</li>
+                        <li>Omaha,NE</li>
+                        <li>London,UK</li>
+                        <li>Anchorage</li>
+                        <li>New York,NY</li>
+                    </ul>
+                </div>
+            );
         } else {
             return (
                 <div className='col-6'>
-                    {JSON.stringify(data)}
+                    <div className="card">
+                        <h5 className="card-header">Location: {this.props.city}</h5>
+                        <div className="card-body">
+                            {JSON.stringify(data)}
+                        </div>
+                    </div>
                 </div>
             );
         }
