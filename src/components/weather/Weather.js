@@ -7,13 +7,14 @@ class Weather extends React.Component {
             error: null,
             isLoaded: false,
             data: null,
-            url: 'https://api.openweathermap.org/data/2.5/weather?q=',
+            url: 'http://api.openweathermap.org/data/2.5/weather?q=',
+            appId: '6a1755e17f596796af14957b79f7cf96',
             city: this.props.city
         }
     }
 
     componentDidMount() {
-        fetch(`${this.state.url}${this.state.city}`)
+        fetch(`${this.state.url}${this.state.city}&APPID=${this.state.appId}`)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -39,7 +40,7 @@ class Weather extends React.Component {
             return <div>Loading...</div>;
         } else {
             return (
-                <div>
+                <div className='col-6'>
                     {JSON.stringify(data)}
                 </div>
             );
