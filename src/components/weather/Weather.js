@@ -10,14 +10,14 @@ class Weather extends React.Component {
             url: 'http://api.openweathermap.org/data/2.5/weather?q=',
             iconUrl: 'http://openweathermap.org/img/wn/',
             iconImageSuffix: '@2x.png',
-            appId: '6a1755e17f596796af14957b79f7cf96'
+            appId: '6a1755e17f596796af14957b79f7cf96',
+            city: this.props.city || null
         }
-        console.log(this.props);
     }
 
     componentDidMount() {
-        if(this.props.city) {
-            fetch(`${this.state.url}${this.props.city}&APPID=${this.state.appId}`)
+        if(this.state.city) {
+            fetch(`${this.state.url}${this.state.city}&APPID=${this.state.appId}`)
                 .then(res => res.json())
                 .then(
                     (result) => {
@@ -65,7 +65,7 @@ class Weather extends React.Component {
             return (
                 <div className='col-6'>
                     <div className="card">
-                        <h5 className="card-header">Location: {this.props.city} Weather</h5>
+                        <h5 className="card-header">Location: {this.state.city} Weather</h5>
                         <div className="card-body">
                             <p><img src={`${this.state.iconUrl}${data.weather[0].icon}${this.state.iconImageSuffix}`} alt={data.weather[0].main}/></p>
                             <p><strong>{data.weather[0].main}:</strong> {data.weather[0].description}</p>

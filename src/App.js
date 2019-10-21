@@ -5,7 +5,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            city: 'london'
+            city: ''
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,7 +13,6 @@ class App extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state.city);
     }
 
     render() {
