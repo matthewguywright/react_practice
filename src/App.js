@@ -5,7 +5,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            city: ''
+            city: 'Omaha'
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);

@@ -56,9 +56,12 @@ class Weather extends React.Component {
             return (
                 <div className='col-6'>
                     <div className="card">
-                        <h5 className="card-header">Location: {this.props.city}</h5>
+                        <h5 className="card-header">Location: {this.props.city} Weather</h5>
                         <div className="card-body">
-                            {JSON.stringify(data)}
+                            <p><span className="fa fa-cloud fa-2x"></span></p>
+                            <p>{data.weather[0].main}: {data.weather[0].description}</p>
+                            <p>Wind Speed: {data.wind.speed}mph, with gusts up to {data.wind.gust}mph.</p>
+                            <p>Humidity: {data.main.humidity}%</p>
                         </div>
                     </div>
                 </div>
