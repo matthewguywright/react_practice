@@ -8,6 +8,8 @@ class Weather extends React.Component {
             isLoaded: false,
             data: null,
             url: 'http://api.openweathermap.org/data/2.5/weather?q=',
+            iconUrl: 'http://openweathermap.org/img/wn/',
+            iconImageSuffix: '@2x.png',
             appId: '6a1755e17f596796af14957b79f7cf96'
         }
         console.log(this.props);
@@ -34,6 +36,13 @@ class Weather extends React.Component {
         }
     }
 
+    convertUnixToStandardDate = (unixTimestamp) => {
+        const date = new Date(unixTimestamp * 1000);
+        const hours = date.getHours();
+        const minutes = `0 + ${date.getMinutes()}`;
+        return `${hours}:${minutes.substr(-2)}`;
+    }
+
     render() {
         const {error, isLoaded, data} = this.state;
         if (error) {
@@ -58,10 +67,12 @@ class Weather extends React.Component {
                     <div className="card">
                         <h5 className="card-header">Location: {this.props.city} Weather</h5>
                         <div className="card-body">
-                            <p><span className="fa fa-cloud fa-2x"></span></p>
-                            <p>{data.weather[0].main}: {data.weather[0].description}</p>
-                            <p>Wind Speed: {data.wind.speed}mph, with gusts up to {data.wind.gust}mph.</p>
-                            <p>Humidity: {data.main.humidity}%</p>
+                            <p><img src={`${this.state.iconUrl}${data.weather[0].icon}${this.state.iconImageSuffix}`} alt={data.weather[0].main}/></p>
+                            <p><strong>{data.weather[0].main}:</strong> {data.weather[0].description}</p>
+                            <p><strong>Wind Speed:</strong> {data.wind.speed}mph</p>
+                            <p><strong>Humidity:</strong> {data.main.humidity}%</p>
+                            <p><strong>Sunrise:</strong> {this.convertUnixToStandardDate(data.sys.sunrise)}</p>
+                            <p><strong>Sunset:</strong> {this.convertUnixToStandardDate(data.sys.sunset)}</p>
                         </div>
                     </div>
                 </div>
