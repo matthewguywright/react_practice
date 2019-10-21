@@ -23,10 +23,17 @@ class App extends React.Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        data: result
-                    });
+                    if(result.cod !== '404') {
+                        this.setState({
+                            isLoaded: true,
+                            data: result
+                        });
+                    } else {
+                        this.setState({
+                            isLoaded: true,
+                            error: result
+                        });
+                    }
                 },
                 (error) => {
                     this.setState({
@@ -34,10 +41,21 @@ class App extends React.Component {
                         error
                     });
                 }
-            )
+            ).finally(() => {
+                console.log(this.state);
+            });
+    }
+
+    resetData() {
+        this.setState({
+            error: null,
+            isLoaded: null,
+            data: null
+        });
     }
 
     handleSubmit = (event) => {
+        this.resetData();
         if(this.state.city) {
             this.weatherApiCall();
         }
