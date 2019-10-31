@@ -68,7 +68,7 @@ class App extends React.Component {
                 <div className="col-6">
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                            <label htmlFor="city">Enter City or City, State</label>
+                            <label htmlFor="city">Enter City or City, Country Code</label>
                             <input type="text"
                                    className="form-control"
                                    value={this.state.city}

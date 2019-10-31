@@ -25,6 +25,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -51,6 +52,7 @@
       <workItem from="1571443916602" duration="11807000" />
       <workItem from="1571505672214" duration="1622000" />
       <workItem from="1571606349144" duration="5659000" />
+      <workItem from="1572549032065" duration="1207000" />
     </task>
     <servers />
   </component>

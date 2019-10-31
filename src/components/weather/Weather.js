@@ -5,6 +5,10 @@ class Weather extends React.Component {
         super(props);
     }
 
+    kelvinToFarenheit(kelvinTemp) {
+        return Math.floor((kelvinTemp - 273.15) * 9/5 + 32)
+    }
+
     render() {
         if (this.props.payload.error) {
             return <div className='alert alert-danger col-6'>API Error: {this.props.payload.error.message}</div>;
@@ -23,15 +27,17 @@ class Weather extends React.Component {
                 </div>
             );
         } else {
+            const weather = this.props.payload;
             return (
                 <div className='col-6'>
                     <div className="card">
-                        <h5 className="card-header">Location: {this.props.payload.city.toUpperCase()}</h5>
+                        <h5 className="card-header">Location: {weather.city.toUpperCase()}</h5>
                         <div className="card-body">
-                            <p><img src={`${this.props.payload.iconUrl}${this.props.payload.data.weather[0].icon}${this.props.payload.iconImageSuffix}`} alt={this.props.payload.data.weather[0].main}/></p>
-                            <p><strong>{this.props.payload.data.weather[0].main}:</strong> {this.props.payload.data.weather[0].description}</p>
-                            <p><strong>Wind Speed:</strong> {this.props.payload.data.wind.speed} mph</p>
-                            <p><strong>Humidity:</strong> {this.props.payload.data.main.humidity} %</p>
+                            <h2 className="">{this.kelvinToFarenheit(weather.data.main.temp)}&deg;F</h2>
+                            <p><img src={`${weather.iconUrl}${weather.data.weather[0].icon}${weather.iconImageSuffix}`} alt={weather.data.weather[0].main}/></p>
+                            <p><strong>{weather.data.weather[0].main}:</strong> {weather.data.weather[0].description}</p>
+                            <p><strong>Wind Speed:</strong> {weather.data.wind.speed} mph</p>
+                            <p><strong>Humidity:</strong> {weather.data.main.humidity} %</p>
                         </div>
                     </div>
                 </div>
